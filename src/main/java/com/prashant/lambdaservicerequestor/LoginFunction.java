@@ -20,6 +20,8 @@ import com.prashant.lambdaservicerequestor.domain.Response;
 @Component
 public class LoginFunction implements Function<LoginRequest, Response> {
 
+  String apiURL = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=<for base api key>";
+
   @Override
   public Response apply(LoginRequest loginRequest) {
 
@@ -35,7 +37,7 @@ public class LoginFunction implements Function<LoginRequest, Response> {
     HttpEntity<LoginRequest> request = new HttpEntity<LoginRequest>(loginRequest, headers);
     try {
       response = restTemplate
-        .postForEntity("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=<fir base api key>", request, LoginResponse.class);
+        .postForEntity(apiURL, request, LoginResponse.class);
 
       finalResponse.setLoginResponse(response.getBody());
 
